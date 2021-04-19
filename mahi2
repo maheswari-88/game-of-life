@@ -4,23 +4,17 @@ agent{label 'HRMS&&QA'}
 triggers{ cron('30 * * * 1-5') }
 parameters
 {
-    string
-    (
+    string(
         name: 'testresultspath',
         defaultValue: 'gameoflife-web/target/surefire-reports/*.xml',
-        description: 'testresultspath'
-    )
-    string
-    (
+        description: 'testresultspath')
+    string(
         name: 'archivetheartifacts',
         defaultValue: 'gameoflife-web/target/*.war',
-        description: 'this is archival path'
-    )
-    choice
-    (
+        description: 'this is archival path')
+    choice(
         name: 'branchtobuild',
-        choices: ['declarativepipeline','scriptedpipeline','master']
-    ) 
+        choices: ['declarativepipeline','scriptedpipeline','master'])
 }
 stages
 {
