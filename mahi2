@@ -11,7 +11,7 @@ stages
             git branch: 'declarativepipeline', url: 'https://github.com/maheswari-88/game-of-life.git'
         }
     }
-    stage('compile)
+    stage('compile')
     {
         steps
         {
