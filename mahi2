@@ -5,12 +5,12 @@ triggers{ cron('30 * * * 1-5') }
 parameters{
     string(
         name: 'testresultspath',
-        defaultvalue: 'gameoflife-web/target/surefire-reports/*.xml',
+        defaultValue: 'gameoflife-web/target/surefire-reports/*.xml',
         description: 'testresultspath'
     )
     string(
         name: 'archivetheartifacts',
-        defaultvalue: 'gameoflife-web/target/*.war',
+        defaultValue: 'gameoflife-web/target/*.war',
         description: 'this is archival path'
     )
     choice(
