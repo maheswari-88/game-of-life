@@ -2,13 +2,30 @@ pipeline
 {
 agent{label 'HRMS&&QA'}
 triggers{ cron('30 * * * 1-5') }
+parameters{
+    string(
+        name: 'testresultspath',
+        defaultvalue: 'gameoflife-web/target/surefire-reports/*.xml',
+        description: 'testresultspath'
+    )
+    string(
+        name: 'archivetheartifacts',
+        defaultvalue: 'gameoflife-web/target/*.war',
+        description: 'this is archival path'
+    )
+    choice(
+        name: 'branchtobuild',
+        choices: ['declarativepipeline','scriptedpipeline','master']
+    )
+    
+}
 stages
 {
     stage('git')
     {
         steps
         {
-            git branch: 'declarativepipeline', url: 'https://github.com/maheswari-88/game-of-life.git'
+            git branch: "${params.BranchToBuild}", url: 'https://github.com/maheswari-88/game-of-life.git'
         }
     }
     stage('compile')
@@ -16,6 +33,12 @@ stages
         steps
         {
             sh 'mvn clean package'
+        }
+    }
+    stage('postbuild'){
+        steps{
+            junit testResults: "${params.testresultspath}"
+            archive includes: "${params.archivetheartifacts}"
         }
     }
 }
