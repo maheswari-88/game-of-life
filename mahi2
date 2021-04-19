@@ -5,7 +5,7 @@ triggers{ cron('30 * * * 1-5') }
 parameters
 {
     string(
-        name: 'testresultspath',
+        name: 'testResultspath',
         defaultValue: 'gameoflife-web/target/surefire-reports/*.xml',
         description: 'testresultspath')
     string(
@@ -36,7 +36,7 @@ stages
     {
         steps
         {
-            junit testresults: "${params.testresultspath}"
+            junit testResults: "${params.testResultspath}"
             archive includes: "${params.archivetheartifacts}"
         }
     }
