@@ -2,22 +2,25 @@ pipeline
 {
 agent{label 'HRMS&&QA'}
 triggers{ cron('30 * * * 1-5') }
-parameters{
-    string(
+parameters
+{
+    string
+    (
         name: 'testresultspath',
         defaultValue: 'gameoflife-web/target/surefire-reports/*.xml',
         description: 'testresultspath'
     )
-    string(
+    string
+    (
         name: 'archivetheartifacts',
         defaultValue: 'gameoflife-web/target/*.war',
         description: 'this is archival path'
     )
-    choice(
+    choice
+    (
         name: 'branchtobuild',
         choices: ['declarativepipeline','scriptedpipeline','master']
-    )
-    
+    ) 
 }
 stages
 {
@@ -35,8 +38,10 @@ stages
             sh 'mvn clean package'
         }
     }
-    stage('postbuild'){
-        steps{
+    stage('postbuild')
+    {
+        steps
+        {
             junit testResults: "${params.testresultspath}"
             archive includes: "${params.archivetheartifacts}"
         }
