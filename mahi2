@@ -28,7 +28,7 @@ stages
     {
         steps
         {
-            git branch: "${params.BranchToBuild}", url: 'https://github.com/maheswari-88/game-of-life.git'
+            git branch: "${params.branchtobuild}", url: 'https://github.com/maheswari-88/game-of-life.git'
         }
     }
     stage('compile')
@@ -42,7 +42,7 @@ stages
     {
         steps
         {
-            junit testResults: "${params.testresultspath}"
+            junit testresults: "${params.testresultspath}"
             archive includes: "${params.archivetheartifacts}"
         }
     }
